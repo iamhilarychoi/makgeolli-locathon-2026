@@ -1,0 +1,266 @@
+.wrap {
+  min-height: 100dvh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  flex: 1;
+  max-width: var(--max-w);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  overflow-y: auto;
+}
+
+/* ── 헤더 ───────────────────────────────── */
+.header {
+  padding-top: 24px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.backBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  margin-bottom: 8px;
+  transition: background 0.12s;
+}
+.backBtn:active { background: var(--border); }
+
+.eyebrow {
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.metaPill {
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: #555555;
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  border-radius: 99px;
+  padding: 4px 12px;
+}
+
+/* ── 지도 ───────────────────────────────── */
+.mapArea {
+  position: relative;
+  height: 155px;
+  overflow: hidden;
+  margin: 0 calc(-1 * var(--pad-x)) 14px;
+}
+
+.progressPill {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(255,255,255,0.90);
+  backdrop-filter: blur(6px);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ── CTA ────────────────────────────────── */
+.ctaWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.ctaBtn {
+  width: 257px;
+  height: 46px;
+  background: var(--red);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: background 0.15s;
+}
+.ctaBtn:active { background: var(--red-dark); }
+
+/* ── 웨이포인트 목록 ────────────────────── */
+.placeList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+/* 각 아이템: 왼쪽(배지+선) + 오른쪽(텍스트+시간) */
+.placeItem {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* 왼쪽 열: 번호 원 + 수직선 */
+.badgeCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  padding-top: 10px;
+}
+
+/* 빨간 원 (출발·도착·공방) */
+.numBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.numBadgeRed {
+  background: var(--red);
+  color: #fff;
+}
+
+.numBadgeGray {
+  background: #999999;
+  border: 1.5px solid #999999;
+  color: #ffffff;
+}
+
+.numBadgeNavy {
+  background: transparent;
+  border: 1.5px solid #4A5580;
+  color: #4A5580;
+}
+
+/* 수직 연결선 — 절반 길이 */
+.connLine {
+  width: 1.5px;
+  height: 28px;
+  flex-shrink: 0;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* 오른쪽 열 */
+.rightCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+}
+
+/* 카드 버튼 */
+.placeCard {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0 4px;
+  text-align: left;
+  width: 100%;
+  transition: opacity 0.15s;
+}
+.placeCard.active .placeName {
+  color: #000000;
+}
+
+.placeInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.placeName {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.placeDesc {
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 도보 시간: 카드 바로 아래 */
+.connTime {
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 2px 0 10px;
+}
+
+.typeBadge {
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 99px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.type_start, .type_end, .type_craft, .type_landmark, .type_food {
+  background: transparent;
+  color: #999999;
+}
+
+.navSpacer {
+  height: calc(var(--nav-h) + var(--safe-b) + 12px);
+}

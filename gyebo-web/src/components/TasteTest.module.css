@@ -1,0 +1,191 @@
+/* ─────────────────────────────────────────
+   Taste Test Redesign
+   ───────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  z-index: 400;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* ── Header ──────────────────────────────── */
+.top {
+  flex-shrink: 0;
+  padding: 40px var(--px) 0;
+}
+.topLabel {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 16px;
+}
+.track {
+  height: 2px;
+  background: #F4F4F4;
+  width: 100%;
+}
+.fill {
+  height: 100%;
+  background: #DDDDDD; /* Gray fill based on mockup */
+  transition: width 0.5s ease;
+}
+.count {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #999;
+}
+
+/* ── Body ─────────────────────────── */
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 100px var(--px) 200px;
+  position: relative;
+  z-index: 3;
+}
+.card {
+  width: 100%;
+  will-change: transform, opacity;
+}
+.question {
+  font-size: 26px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+/* ── Options (List) ───────── */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.2s;
+  will-change: transform, opacity;
+}
+.optionDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #DDDDDD;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.optionLabel {
+  font-size: 15px;
+  font-weight: 400;
+}
+.option:hover {
+  border-color: #CCCCCC;
+}
+.optionOn {
+  background: #CBD7F2;
+  border-color: #B9CAF1;
+}
+.optionOn .optionDot {
+  border-width: 5px;
+  border-color: #98AFE3;
+}
+
+/* ── Bubbles (Random floating) ──────────────── */
+.bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  height: 320px;
+}
+.bubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+  will-change: transform, opacity;
+  animation: floatBounce 3s ease-in-out infinite alternate;
+}
+/* Randomly placed and sized bubbles based on their index to mimic the screenshot */
+.b0 { width: 100px; height: 100px; top: 8%; left: 12%; animation-duration: 2.8s; }
+.b1 { width: 106px; height: 106px; top: 8%; right: 12%; animation-duration: 3.2s; animation-delay: -1s; }
+.b2 { width: 88px; height: 88px; top: 34%; left: 39%; animation-duration: 2.5s; animation-delay: -0.5s; }
+.b3 { width: 98px; height: 98px; top: 62%; left: 18%; animation-duration: 3.5s; animation-delay: -1.5s; }
+.b4 { width: 104px; height: 104px; top: 60%; right: 16%; animation-duration: 3s; animation-delay: -2s; }
+.b5 { width: 95px; height: 95px; top: 25%; left: 45%; animation-duration: 2.9s; animation-delay: -0.8s; }
+
+@keyframes floatBounce {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-20px); }
+}
+
+.bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.bubbleOn {
+  background: #CBD7F2;
+  border-color: #B9CAF1;
+  animation-play-state: paused;
+}
+
+/* ── Prefer Bottle (Vase) ───────────────────────── */
+.jarWrap {
+  position: absolute;
+  left: 50%;
+  bottom: -150px;
+  transform: translateX(-50%);
+  width: 240px;
+  z-index: 1;
+  pointer-events: none;
+}
+.preferImg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.jarMouthPoint {
+  position: absolute;
+  top: 10px; left: 50%;
+  width: 1px; height: 1px;
+  transform: translateX(-50%);
+}
+
+/* ── 접근성 ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bubble { animation: none; }
+  .fill { transition: none; }
+}

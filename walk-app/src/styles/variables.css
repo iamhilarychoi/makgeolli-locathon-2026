@@ -1,0 +1,50 @@
+/* ─────────────────────────────────────────
+   산책 앱 디자인 토큰 — Figma 2026 팔레트
+   메인: #C04830 (레드) · #4A5580 (네이비) · #FFFFFF (배경)
+   ───────────────────────────────────────── */
+:root {
+  /* 배경 */
+  --bg:          #FFFFFF;
+  --bg-secondary: #EBEDF4;
+  --surface:     #FFFFFF;
+
+  /* 주요 텍스트 */
+  --ink:         #2C2C2A;
+  --muted:       #999999;
+
+  /* 경계선 */
+  --border:      #E0E2EB;
+  --border-dark: #CACACA;
+
+  /* 핵심 색상 */
+  --red:         #C04830;   /* 메인 액션·강조 */
+  --red-dark:    #A33A24;
+  --navy:        #4A5580;   /* 보조 강조·네이비 */
+  --blue:        #3254FF;   /* 활성 상태·링크 */
+  --green:       #9DB89A;   /* 성공·완료 (세이지 그린) */
+
+  /* 레이아웃 */
+  --max-w:       480px;
+  --pad-x:       20px;
+  --nav-h:       60px;
+  --safe-b:      env(safe-area-inset-bottom, 0px);
+
+  /* 반경 */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 999px;
+
+  /* 레거시 호환 (지도 컴포넌트용) */
+  --paper:       var(--bg);
+  --line:        var(--border);
+  --azalea:      var(--red);
+  --azalea-lt:   #FAE8E9;
+  --jade:        #87CFBD;
+  --jade-lt:     #D4EFE9;
+  --gold:        #C8A818;
+  --gold-lt:     #FFF5C0;
+  --plum:        #8A1520;
+  --heatmap:     rgba(192, 72, 48, 0.20);
+}

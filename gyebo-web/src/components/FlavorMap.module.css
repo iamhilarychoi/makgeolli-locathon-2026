@@ -1,0 +1,261 @@
+/* ═══════════════════════════════════════════
+   FlavorMap — 맛의 지형도 Redesign
+   ═══════════════════════════════════════════ */
+
+.page {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: #FCFCFC; /* Clean white background */
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* ── 한반도 맵 레이어 ───────────────────── */
+.map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: blur(0px); /* No initial blur for clean look */
+  will-change: transform, filter;
+}
+.mapImg {
+  height: 86%;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.24; /* Lighter gray map */
+  filter: grayscale(100%); /* pure gray */
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: translateX(11%);
+}
+
+/* ── 헤더 ───────────────────────────────── */
+.header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px var(--px);
+}
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: -8px;
+}
+.title {
+  font-family: 'MaruBuriOTF', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  text-align: center;
+}
+
+/* ── 맛 4분면 매트릭스 ──────────────────── */
+.matrix {
+  position: absolute;
+  inset: 84px 26px 40px;
+  z-index: 10;
+  will-change: transform, opacity;
+}
+.axisV {
+  position: absolute;
+  left: 50%; top: 0; bottom: 0; width: 1px;
+  transform: translateX(-0.5px);
+  background: repeating-linear-gradient(to bottom, #D4D4D4 0 6px, transparent 6px 12px);
+}
+.axisH {
+  position: absolute;
+  top: 50%; left: 0; right: 0; height: 1px;
+  transform: translateY(-0.5px);
+  background: repeating-linear-gradient(to right, #D4D4D4 0 6px, transparent 6px 12px);
+}
+
+.axisLabel {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 500;
+  color: #777;
+  background: #FCFCFC;
+  padding: 4px;
+}
+.axTop    { top: -20px; left: 50%; transform: translateX(-50%); }
+.axBottom { bottom: -20px; left: 50%; transform: translateX(-50%); }
+.axLeft   { left: -20px; top: 50%; transform: translateY(-50%); }
+.axRight  { right: -20px; top: 50%; transform: translateY(-50%); }
+
+/* ── 노드 (화이트 버블) ─────────────────── */
+.node {
+  position: absolute;
+  width: 44px !important; /* Fixed size to match screenshot */
+  height: 44px !important;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+.nodeBubble {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+}
+.nodeNum {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  pointer-events: none;
+}
+
+/* ── 중앙 스테이지 (파동 + 병) ──────────── */
+.stage {
+  position: absolute;
+  left: 50%; top: 28%; /* Moved further up to avoid panel overlap */
+  z-index: 15;
+  transform: translate(-50%, -50%);
+}
+.ripple {
+  position: absolute;
+  left: 50%; top: 60%;
+  width: 140px; height: 140px;
+  margin: -70px 0 0 -70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
+  will-change: transform, opacity;
+}
+.bottle {
+  position: relative;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.8) 40%,
+    rgba(255,255,255,0.2) 70%,
+    transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity, background;
+  transition: background 0.4s ease;
+}
+.hideBottleBg {
+  background: transparent;
+}
+.bottleImg {
+  position: absolute;
+  width: 55%; height: 55%;
+  object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+.hiddenIcon {
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+}
+.realImg {
+  position: absolute;
+  width: 140%; height: 140%; /* ~2.5x of 55% */
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.showRealImg {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* ── 지역 상세 패널 (Card) ──────────────── */
+.panel {
+  position: absolute;
+  left: var(--px); right: var(--px);
+  bottom: 24px;
+  z-index: 25;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(238, 238, 238, 0.78);
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.panelHead { margin-bottom: 12px; }
+.panelLevel {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 99px;
+  border: 1px solid;
+}
+.lv_intro { color: #F29B27; border-color: #F29B27; }
+.lv_mid   { color: #4A90E2; border-color: #4A90E2; }
+.lv_deep  { color: #D0021B; border-color: #D0021B; }
+
+.panelName {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 8px;
+}
+.panelMeta {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 20px;
+}
+.divider { margin: 0 6px; color: #DDD; }
+
+.panelTags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px; }
+.panelTag {
+  font-size: 11px;
+  font-weight: 500;
+  color: #777;
+  background: #F8F8F8;
+  padding: 6px 14px;
+  border-radius: 99px;
+}
+
+.panelStory {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: left;
+  width: 100%;
+  white-space: pre-line;
+}
+.panelBars { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.bar { display: flex; align-items: center; gap: 16px; }
+.barLabel { font-size: 12px; font-weight: 500; color: #777; width: 32px; flex-shrink: 0; }
+.barTrack { flex: 1; height: 2px; background: #EEEEEE; overflow: hidden; }
+.barFill { height: 100%; background: #444444; }

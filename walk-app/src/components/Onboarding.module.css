@@ -1,0 +1,146 @@
+/* ── 래퍼 ──────────────────────────────────
+   Figma: white bg, 317px wide (max-w 480px), 617px tall
+   ─────────────────────────────────────────── */
+.wrap {
+  position: relative;
+  min-height: 100dvh;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  background: #FFFFFF;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 블롭 배경 ────────────────────────────
+   Figma: position absolute, x:-71 y:~210 from screen top
+   (text area starts ~330px from top, blob y:-119 relative to inner container)
+   ─────────────────────────────────────────── */
+.blob {
+  position: absolute;
+  left: -47px;    /* screen-x = container-x(24) + blob-x(-71) = -47 */
+  top: 211px;     /* statusbar(26) + padding-top(45) + logo(239) + gap(20) - blob-y(119) = 211 */
+  pointer-events: none;
+  z-index: 0;
+}
+.blob svg {
+  display: block;
+}
+
+/* ── 스테이터스 바 ──────────────────────────
+   Figma: 832:20, padding 9px 20px 7px, hug height ≈ 26px
+   ─────────────────────────────────────────── */
+.statusBar {
+  flex-shrink: 0;
+  height: 26px;
+}
+
+/* ── 메인 콘텐츠 ──────────────────────────
+   Figma: 832:21, column, center, gap 20px, padding 45px 24px 36px
+   ─────────────────────────────────────────── */
+.main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 45px var(--pad-x) 36px;
+}
+
+/* ── 로고 영역 ────────────────────────────
+   Figma: 832:22, row center, hug width, 239px height
+   ─────────────────────────────────────────── */
+.logoArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 239px;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  width: 127px;
+  height: 121px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── 텍스트 영역 ──────────────────────────
+   Figma: 832:24, column stretch, 269×180
+   ─────────────────────────────────────────── */
+.textArea {
+  width: 269px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+/* 자막 — Figma: Noto Serif KR Regular 13px, #999999, center, letter-spacing 7.69% */
+.subtitle {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+  text-align: center;
+  letter-spacing: 0.077em;
+  line-height: 19.5px;
+  margin: 0;
+  margin-top: auto;
+  margin-bottom: 4px;
+}
+
+/* 제목 — Figma: Noto Serif KR Bold 26px, letter-spacing 7.69%, center */
+.heading {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.077em;
+  line-height: 36.4px;
+  margin: 0;
+}
+
+/* ts1: MaruBuriOTF → fallback Noto Serif KR, #2C2C2A */
+.headingDark {
+  color: #2C2C2A;
+}
+
+/* ts2: MaruBuriOTF → fallback Noto Serif KR, #C04830 */
+.headingRed {
+  color: #C04830;
+}
+
+/* ── CTA 버튼 ────────────────────────────
+   Figma: 832:32, 257×51, white fill, #C04830 stroke 1px, radius 12px
+   Text: "시작하기" MaruBuriOTF SemiBold 600, 14px, 3.57% letter-spacing
+   ─────────────────────────────────────────── */
+.cta {
+  width: 257px;
+  height: 51px;
+  margin-top: 80px;
+  background: #FFFFFF;
+  border: 1px solid #C04830;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 21px;
+  flex-shrink: 0;
+  color: #C04830;
+  transition: background 0.15s;
+}
+.cta:active {
+  background: rgba(192, 72, 48, 0.04);
+}
+
+.ctaText {
+  font-family: 'Noto Serif KR', serif; /* MaruBuriOTF fallback */
+  font-size: 14px;
+  font-weight: 600;
+  color: #C04830;
+  letter-spacing: 0.036em;
+}

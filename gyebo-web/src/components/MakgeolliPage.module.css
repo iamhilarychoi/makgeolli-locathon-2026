@@ -1,0 +1,302 @@
+/* ═══════════════════════════════════════════
+   MakgeolliPage — Redesigned layout
+   ═══════════════════════════════════════════ */
+
+.page {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #F5F5F5;
+  color: #1A1A1A;
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  overflow-x: clip;
+}
+
+/* ── 네비게이션 ─────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  padding-top: 32px;
+  background: rgba(245, 245, 245, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navBack {
+  background: transparent;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.navBack:hover {
+  color: #111111;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navBtn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+  background: #F5F5F5;
+  border: 0.5px solid #000;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.navBtn:hover {
+  background: #EDEDED;
+  border-color: #000;
+}
+
+/* ── 인트로 헤더 ────────────────────────── */
+.intro {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 0;
+}
+
+.introIcon {
+  width: 72px;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  margin-bottom: 14px;
+}
+
+.introTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.introKr {
+  font-family: 'MaruBuriOTF', Georgia, serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.02em;
+}
+
+.introEn {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #999999;
+}
+
+.introSub {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #000000;
+  word-break: keep-all;
+}
+
+.introDivider {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-top: 32px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+/* ── 컬렉션 카드 그리드 ─────────────────── */
+.collection {
+  position: relative;
+  z-index: 10;
+  padding: 0 24px 24px;
+}
+
+.colHead {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.colCount {
+  font-size: 10px;
+  color: #999999;
+  letter-spacing: 0.05em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* ── 카드 ───────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 18px 12px 24px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.04);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  transform: translateY(24px);
+}
+.card[data-visible="true"] {
+  animation: cardIn 0.5s ease both;
+  animation-delay: inherit;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
+
+.cardInfoTop {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.cardLevel {
+  font-family: 'MaruBuriOTF', Georgia, serif;
+  font-size: 11px;
+  font-weight: 400;
+  padding: 0 16px;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+
+.lv_intro { color: #F0A225; }
+.lv_mid   { color: #43A100; }
+.lv_deep  { color: #A10000; }
+
+.cardThumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.cardImg {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  background: transparent;
+}
+
+.cardComposite {
+  position: relative;
+  width: 84%;
+  height: 84%;
+}
+
+.cardComposite .cardImg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+}
+
+.cardCompositeBase {
+  width: 82% !important;
+  transform: translate(-50%, -18%);
+}
+
+.cardCompositeBloom {
+  width: 54% !important;
+}
+
+.cardCompositeBloomLeft {
+  transform: translate(-97%, -99%) scale(0.58) rotate(-8deg);
+}
+
+.cardCompositeBloomRight {
+  transform: translate(-9%, -22%) scale(0.78) rotate(-4deg);
+}
+
+.cardInfoBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardRegion {
+  font-size: 10px;
+  color: #999999;
+}
+
+.cardName {
+  font-family: 'MaruBuri', Georgia, serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  word-break: keep-all;
+  line-height: 1.3;
+}
+
+/* ── 푸터 ───────────────────────────────── */
+.footer {
+  position: relative;
+  z-index: 10;
+  padding: 32px 24px 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.homeBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  padding: 16px 60px;
+  border-radius: 99px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.2s, background 0.2s;
+}
+.homeBtn:hover {
+  background: #000000;
+  transform: translateY(-2px);
+}
+
+/* ── 추천 토스트 등 나머지 공통 스타일 ── */
+.recoToast {
+  /* 동일하게 유지 */
+  display: none;
+}

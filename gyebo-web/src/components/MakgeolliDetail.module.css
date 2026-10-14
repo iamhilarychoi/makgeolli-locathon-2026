@@ -1,0 +1,316 @@
+/* ─────────────────────────────────────────
+   Makgeolli Detail Redesign
+   ───────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: #FAFAFA;
+  overflow: hidden;
+}
+
+.backBtn {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 10;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.backBtn:hover {
+  color: #111;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100svh;
+  padding-top: 42px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  opacity: 0; /* handled by GSAP */
+}
+
+/* ── Image Section ──────────────────────── */
+.imageSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  margin-bottom: 0;
+}
+
+.heroImg {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
+  background: transparent;
+}
+
+.imageShadow {
+  width: 160px;
+  height: 16px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 70%);
+  margin-top: 4px;
+}
+
+.heroComposite {
+  position: relative;
+  width: 230px;
+  height: 185px;
+  margin-top: 16px;
+}
+
+.heroCompositeImg {
+  position: absolute;
+  object-fit: contain;
+}
+
+.heroCompositeBase {
+  width: 180px;
+  left: 50%;
+  top: 72px;
+  transform: translateX(-50%);
+}
+
+.heroCompositeBloom {
+  width: 112px;
+}
+
+.heroCompositeBloomLeft {
+  left: 8px;
+  top: 6px;
+  transform: scale(0.64) rotate(-8deg);
+}
+
+.heroCompositeBloomRight {
+  right: -8px;
+  top: 64px;
+  transform: scale(0.9) rotate(-4deg);
+}
+
+.heroComposite .imageShadow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.yuzuScene {
+  position: relative;
+  width: min(100%, 320px);
+  height: 205px;
+}
+
+.yuzuImg {
+  position: absolute;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 14px rgba(0,0,0,0.08));
+}
+
+.yuzuLeft {
+  width: 126px;
+  left: 24px;
+  top: 46px;
+  transform: scaleX(-1) rotate(-12deg);
+}
+
+.yuzuRight {
+  width: 150px;
+  right: 12px;
+  top: 88px;
+  transform: rotate(-3deg);
+}
+
+.yuzuDot {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #FFF49F;
+}
+
+.yuzuDotLarge {
+  width: 36px;
+  height: 36px;
+  left: 140px;
+  top: 30px;
+}
+
+.yuzuDotSmall {
+  width: 22px;
+  height: 22px;
+  left: 198px;
+  top: 4px;
+}
+
+.yuzuDotTiny {
+  width: 12px;
+  height: 12px;
+  right: 68px;
+  top: 56px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.yuzuShadow {
+  position: absolute;
+  left: 50%;
+  bottom: -56px;
+  width: 224px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.13) 0%, rgba(0,0,0,0.055) 45%, rgba(0,0,0,0) 74%);
+  filter: blur(1.5px);
+  transform: translateX(-46%);
+  pointer-events: none;
+}
+
+
+
+/* ── Card Section ───────────────────────── */
+.cardSection {
+  font-family: 'MaruBuriOTF', Georgia, serif;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 22px;
+  padding: 22px 24px;
+  margin: auto 16px 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.03);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.levelBadge {
+  font-family: 'MaruBuriOTF', Georgia, serif;
+  font-size: 11px;
+  font-weight: 400;
+  padding: 0 16px;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+.lv_intro { color: #F0A225; }
+.lv_mid   { color: #43A100; }
+.lv_deep  { color: #A10000; }
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.03em;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #A0A0A0;
+}
+.metaDivider {
+  color: #E0E0E0;
+}
+
+.subInfoRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 20px;
+  font-size: 11px;
+  color: #A0A0A0;
+  letter-spacing: 0.05em;
+}
+
+.story {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #333;
+  word-break: keep-all;
+  white-space: pre-line;
+  margin-bottom: 16px;
+}
+
+.tastingNote {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #333;
+  word-break: keep-all;
+  margin-bottom: 40px;
+}
+
+/* ── Flavor Profile ─────────────────────── */
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.flavorRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flavorLabel {
+  font-size: 12px;
+  color: #888;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.flavorTrack {
+  flex: 1;
+  height: 4px;
+  background: #E8E8E8;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.flavorFill {
+  height: 100%;
+  background: #666666;
+  border-radius: inherit;
+  transition: width 0.6s ease 0.2s;
+}
+
+/* ── Tags ───────────────────────────────── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.tag {
+  padding: 5px 14px;
+  border: 1px solid #DDDDDD;
+  border-radius: 99px;
+  font-size: 11px;
+  color: #666;
+  background: #FFF;
+}

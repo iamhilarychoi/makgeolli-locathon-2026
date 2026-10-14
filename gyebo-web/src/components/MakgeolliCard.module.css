@@ -1,0 +1,135 @@
+/* ─────────────────────────────────────────
+   계보 그리드 카드
+   borderless · hover scale · quickview
+   ───────────────────────────────────────── */
+
+.card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  outline: none;
+}
+
+/* ── 썸네일 ─────────────────────────────── */
+.thumb {
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  background: transparent;
+  overflow: hidden;      /* bg 스케일 클립 */
+  position: relative;
+  /* FLIP 시 CSS transition 금지 — GSAP 이 전담 */
+}
+
+/* 배경 블록 — hover 시만 scale */
+.thumbBg {
+  position: absolute;
+  inset: 0;
+  background: var(--card-color, var(--yellow));
+  transition: transform 0.40s var(--ease);
+  will-change: transform;
+}
+.card:hover .thumbBg { transform: scale(1.07); }
+
+/* 텍스트 오버레이 */
+.thumbOverlay {
+  position: absolute;
+  inset: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.32) 100%);
+  pointer-events: none;
+}
+
+.thumbNum {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  user-select: none;
+}
+
+.thumbIngr {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.60);
+  text-transform: uppercase;
+}
+
+/* Quick View 오버레이 — hover 시 페이드인 */
+.quickView {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.26);
+  opacity: 0;
+  transition: opacity 0.22s var(--ease);
+  pointer-events: none;
+}
+.card:hover .quickView { opacity: 1; }
+
+.quickLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255,255,255,0.72);
+  padding: 6px 13px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* ── 카드 하단 정보 ─────────────────────── */
+.info {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.name {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 레벨 배지 */
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  padding: 2px 6px;
+  border-radius: 99px;
+  border: 1px solid currentColor;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.lv_intro { color: var(--jade-dk); }
+.lv_mid   { color: var(--yellow-dk); }
+.lv_deep  { color: var(--red); }
+
+/* 추천 하이라이트 */
+.highlighted .thumb {
+  outline: 2.5px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+/* 포커스 링 (키보드) */
+.card:focus-visible .thumb {
+  outline: 2px solid var(--jade);
+  outline-offset: 3px;
+}
